@@ -29,5 +29,12 @@ struct MainTabView: View {
         .sheet(isPresented: $showingAddEntry) {
             AddEntryView(viewModel: viewModel)
         }
+        .onAppear {
+            // Set tab bar appearance for both light and dark modes
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithDefaultBackground()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+        }
     }
 }
