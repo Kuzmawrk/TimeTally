@@ -77,7 +77,7 @@ struct StatisticsView: View {
                 .foregroundColor(Color(.ttText))
             
             VStack(spacing: 12) {
-                ForEach(viewModel.categoryBreakdown(), id: \\.category) { item in
+                ForEach(viewModel.categoryBreakdown()) { item in
                     HStack {
                         Circle()
                             .fill(Color(item.category.color))

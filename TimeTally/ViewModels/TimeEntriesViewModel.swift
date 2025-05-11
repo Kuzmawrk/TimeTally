@@ -72,9 +72,9 @@ class TimeEntriesViewModel: ObservableObject {
             .reduce(0) { $0 + $1.duration }
     }
     
-    func categoryBreakdown() -> [(category: TimeEntry.Category, total: Double)] {
+    func categoryBreakdown() -> [CategoryStat] {
         Dictionary(grouping: timeEntries, by: { $0.category })
-            .map { (category: $0.key, total: $0.value.reduce(0) { $0 + $1.duration }) }
+            .map { CategoryStat(category: $0.key, total: $0.value.reduce(0) { $0 + $1.duration }) }
             .sorted { $0.total > $1.total }
     }
 }
