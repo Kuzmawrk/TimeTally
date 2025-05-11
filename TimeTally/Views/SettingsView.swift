@@ -3,6 +3,7 @@ import StoreKit
 
 struct SettingsView: View {
     @Environment(\.openURL) private var openURL
+    @StateObject private var themeManager = ThemeManager()
     @State private var showingPrivacyPolicy = false
     @State private var showingTermsOfUse = false
     
@@ -29,6 +30,14 @@ struct SettingsView: View {
                         Text("Support Us")
                     }
                     
+                    Section {
+                        Toggle(isOn: $themeManager.isDarkMode) {
+                            Label("Dark Mode", systemImage: "moon.fill")
+                        }
+                    } header: {
+                        Text("Appearance")
+                    }
+
                     Section {
                         Button {
                             showingPrivacyPolicy = true
