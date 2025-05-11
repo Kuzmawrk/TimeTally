@@ -3,18 +3,19 @@ import SwiftUI
 struct MainTabView: View {
     @StateObject private var viewModel = TimeEntriesViewModel()
     @State private var selectedTab = 0
+    @State private var showingAddEntry = false
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView(viewModel: viewModel, selectedTab: $selectedTab)
+            HomeView(viewModel: viewModel, selectedTab: $selectedTab, showingAddEntry: $showingAddEntry)
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
                 .tag(0)
             
-            AddEntryView(viewModel: viewModel)
+            StatisticsView(viewModel: viewModel)
                 .tabItem {
-                    Label("Add", systemImage: "plus.circle.fill")
+                    Label("Statistics", systemImage: "chart.bar.fill")
                 }
                 .tag(1)
             
@@ -25,5 +26,8 @@ struct MainTabView: View {
                 .tag(2)
         }
         .tint(Color(.ttPrimary))
+        .sheet(isPresented: $showingAddEntry) {
+            AddEntryView(viewModel: viewModel)
+        }
     }
 }

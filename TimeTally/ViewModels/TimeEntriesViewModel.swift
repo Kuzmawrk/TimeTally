@@ -55,10 +55,20 @@ class TimeEntriesViewModel: ObservableObject {
     func weeklyTotal() -> Double {
         let calendar = Calendar.current
         let now = Date()
-        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: now))!
+        let startOfWeek = calendar.date(byAdding: .day, value: -6, to: now)!
         
         return timeEntries
-            .filter { calendar.isDate($0.date, equalTo: startOfWeek, toGranularity: .weekOfYear) }
+            .filter { $0.date >= startOfWeek }
+            .reduce(0) { $0 + $1.duration }
+    }
+    
+    func monthlyTotal() -> Double {
+        let calendar = Calendar.current
+        let now = Date()
+        let startOfMonth = calendar.date(byAdding: .day, value: -29, to: now)!
+        
+        return timeEntries
+            .filter { $0.date >= startOfMonth }
             .reduce(0) { $0 + $1.duration }
     }
     

@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var viewModel: TimeEntriesViewModel
     @Binding var selectedTab: Int
+    @Binding var showingAddEntry: Bool
     
     var body: some View {
         NavigationStack {
@@ -16,6 +17,26 @@ struct HomeView: View {
                         timeEntriesList
                     }
                     .padding()
+                }
+                
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            showingAddEntry = true
+                        }) {
+                            Image(systemName: "plus")
+                                .font(.title2.weight(.semibold))
+                                .foregroundColor(.white)
+                                .frame(width: 60, height: 60)
+                                .background(Color(.ttPrimary))
+                                .clipShape(Circle())
+                                .shadow(radius: 4)
+                        }
+                        .padding(.trailing, 20)
+                        .padding(.bottom, 20)
+                    }
                 }
             }
             .navigationTitle("TimeTally")
