@@ -1,0 +1,38 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "colors" : [
+    {
+      "color" : {
+        "color-space" : "srgb",
+        "components" : {
+          "alpha" : "1.000",
+          "green" : "0.361",
+          "blue" : "0.988",
+          "red" : "0.275"
+        }
+      },
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "value" : "dark",
+          "appearance" : "luminosity"
+        }
+      ],
+      "idiom" : "universal",
+      "color" : {
+        "components" : {
+          "blue" : "1.000",
+          "green" : "0.478",
+          "red" : "0.373",
+          "alpha" : "1.000"
+        },
+        "color-space" : "srgb"
+      }
+    }
+  ]
+}

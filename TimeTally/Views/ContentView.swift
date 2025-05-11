@@ -1,7 +1,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showOnboarding = !Persistence.shared.hasCompletedOnboarding()
+    
     var body: some View {
-        Color.green
+        Group {
+            if showOnboarding {
+                OnboardingView(showOnboarding: $showOnboarding)
+            } else {
+                MainTabView()
+            }
+        }
     }
 }
