@@ -22,6 +22,11 @@ struct AddEntryView: View {
                         
                         TextField("Duration (hours)", text: $duration)
                             .keyboardType(.decimalPad)
+                            .onChange(of: duration) { newValue in
+                                if let lastChar = newValue.last, lastChar == "," {
+                                    duration = newValue.replacingOccurrences(of: ",", with: ".")
+                                }
+                            }
                         
                         Picker("Category", selection: $category) {
                             ForEach(TimeEntry.Category.allCases, id: \.self) { category in
