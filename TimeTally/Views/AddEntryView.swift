@@ -49,7 +49,9 @@ struct AddEntryView: View {
     }
     
     private func saveEntry() {
-        guard let durationValue = Double(duration) else { return }
+        // Convert comma to period for decimal parsing
+        let normalizedDuration = duration.replacingOccurrences(of: ",", with: ".")
+        guard let durationValue = Double(normalizedDuration) else { return }
         
         let entry = TimeEntry(
             title: title,
@@ -59,6 +61,7 @@ struct AddEntryView: View {
         
         viewModel.addEntry(entry)
         clearFields()
+        dismiss() // Dismiss view after saving
     }
     
     private func clearFields() {
