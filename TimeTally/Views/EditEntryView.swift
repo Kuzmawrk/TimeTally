@@ -31,6 +31,11 @@ struct EditEntryView: View {
                         
                         TextField("Duration (hours)", text: $duration)
                             .keyboardType(.decimalPad)
+                            .onChange(of: duration) { newValue in
+                                if let lastChar = newValue.last, lastChar == "," {
+                                    duration = newValue.replacingOccurrences(of: ",", with: ".")
+                                }
+                            }
                         
                         Picker("Category", selection: $category) {
                             ForEach(TimeEntry.Category.allCases, id: \.self) { category in
@@ -64,7 +69,9 @@ struct EditEntryView: View {
     }
     
     private func saveEntry() {
-        guard let durationValue = Double(duration) else { return }
+        // Convert comma to period for decimal parsing
+        let normalizedDuration = duration.replacingOccurrences(of: ",", with: ".")
+        guard let durationValue = Double(normalizedDuration) else { return }
         
         let updatedEntry = TimeEntry(
             id: entry.id,
